@@ -1,6 +1,6 @@
 FROM jupyter/pyspark-notebook:92fe05d1e7e5
 
-MAINTAINER jing wang <jingwangian@gmail.com>
+MAINTAINER vidma <vidma@kensu.io>
 
 ENV MASTER "local[*]"
 
@@ -9,7 +9,7 @@ USER root
 # Install all OS dependencies for openai gym
 RUN apt-get update && apt-get install -yq --no-install-recommends unzip
 
-RUN echo "spark.executor.memory   50g" >>$SPARK_HOME/conf/spark-defaults.conf
+RUN echo "spark.executor.memory   2g" >>$SPARK_HOME/conf/spark-defaults.conf
 
 # switch user
 USER $NB_USER

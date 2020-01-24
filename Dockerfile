@@ -1,4 +1,4 @@
-FROM jupyter/pyspark-notebook
+FROM jupyter/pyspark-notebook:92fe05d1e7e5
 
 MAINTAINER jing wang <jingwangian@gmail.com>
 
@@ -26,13 +26,14 @@ pip install awscli
 
 WORKDIR /home/$NB_USER/work
 
-RUN wget http://h2o-release.s3.amazonaws.com/h2o/rel-weierstrass/7/h2o-3.14.0.7.zip
-RUN wget http://h2o-release.s3.amazonaws.com/sparkling-water/rel-2.2/2/sparkling-water-2.2.2.zip
+# see http://h2o-release.s3.amazonaws.com/sparkling-water/rel-2.2/7/index.html
+RUN wget http://h2o-release.s3.amazonaws.com/h2o/rel-wheeler/4/h2o-3.16.0.4.zip
+RUN wget http://h2o-release.s3.amazonaws.com/sparkling-water/rel-2.2/7/sparkling-water-2.2.7.zip
 
-RUN unzip h2o-3.14.0.7.zip
-RUN unzip sparkling-water-2.2.2.zip
+RUN unzip h2o-3.16.0.4.zip
+RUN unzip sparkling-water-2.2.7
 
-ENV H2O_PYTHON_WHEEL="/home/$NB_USER/work/h2o-3.14.0.7/python/h2o-3.14.0.7-py2.py3-none-any.whl"
+ENV H2O_PYTHON_WHEEL="/home/$NB_USER/work/h2o-3.16.0.4/python/h2o-3.16.0.4-py2.py3-none-any.whl"
 
 EXPOSE 54321
 EXPOSE 54322
@@ -48,6 +49,6 @@ ENV AWS_SECRET_ACCESS_KEY 2
 ENV AWS_DEFAULT_REGION ap-southeast-2
 ENV AWS_DEFAULT_OUTPUT json
 
-WORKDIR sparkling-water-2.2.2
+WORKDIR sparkling-water-2.2.7
 
 CMD ["/bin/bash", "bin/pysparkling"]
